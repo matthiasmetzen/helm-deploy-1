@@ -46,6 +46,7 @@ const run = async () => {
     const atomic = core.getInput("atomic") || true;
     const image = core.getInput("image");
     const tag = core.getInput("tag");
+    const depUp = core.getInput("depUp") || true;
     const additionalArgs = core.getInput("additionalArgs");
 
     core.debug(`param: release = "${release}"`);
@@ -119,6 +120,9 @@ const run = async () => {
         ignoreReturnCode: true,
       });
     } else {
+      if (depUp) {
+        await exec.exec("helm", ["dep", "up", chart]);
+      }
       // Execute the deployment
       await exec.exec("helm", args);
     }
