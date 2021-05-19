@@ -46,6 +46,7 @@ const run = async () => {
     const atomic = core.getInput("atomic") || true;
     const image = core.getInput("image");
     const tag = core.getInput("tag");
+    const additionalArgs = core.getInput("additionalArgs");
 
     core.debug(`param: release = "${release}"`);
     core.debug(`param: namespace = "${namespace}"`);
@@ -55,6 +56,7 @@ const run = async () => {
     core.debug(`param: values = "${values}"`);
     core.debug(`param: valueFiles = "${JSON.stringify(valueFiles)}"`);
     core.debug(`param: secretsFiles = "${JSON.stringify(secretsFiles)}"`);
+    core.debug(`param: additionalArgs = "${JSON.stringify(additionalArgs)}"`);
     core.debug(`param: task = "${task}"`);
     core.debug(`param: timeout = ${timeout}`);
     core.debug(`param: dryRun = "${dryRun}"`);
@@ -89,6 +91,8 @@ const run = async () => {
 
     // Add all the Helm Secrets files
     secretsFiles.forEach((f) => args.push(`--values=secrets://${f}`));
+    
+    additionalArgs.forEach((f) => args.push(`${f}`));
 
     // Add the individually added values
     await fsp.writeFile("/values.yml", values);
