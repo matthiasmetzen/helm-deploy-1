@@ -30,6 +30,24 @@ const getValueFiles = (files) => {
   return fileList.filter((f) => !!f);
 };
 
+const getArgs = (args) => {
+  let argsList;
+  if (typeof args === "string") {
+    try {
+      argsList = JSON.parse(args);
+    } catch (err) {
+      // Assume it's a single string.
+      argsList = [args];
+    }
+  } else {
+    argsList = args;
+  }
+  if (!Array.isArray(argsList)) {
+    return [];
+  }
+  return argsList.filter((f) => !!f);
+};
+
 const run = async () => {
   try {
     const release = core.getInput("release");
@@ -47,7 +65,7 @@ const run = async () => {
     const image = core.getInput("image");
     const tag = core.getInput("tag");
     const depUp = core.getInput("depUp") || true;
-    const additionalArgs = core.getInput("additionalArgs");
+    const additionalArgs = getArgs(core.getInput("additionalArgs"));
 
     core.debug(`param: release = "${release}"`);
     core.debug(`param: namespace = "${namespace}"`);
