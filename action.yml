@@ -28,6 +28,12 @@ inputs:
   secrets-files:
     description: Helm Secrets files to apply to the helm chart as values.
     required: false
+  additionalArgs:
+    description: Additional arguments to add to the helm command
+    required: false
+  depUp:
+    description: Update dependencies before upgrade
+    required: false
   task:
     description: Task name. If the task is "remove" it will remove the configured helm release.
     required: false
