@@ -145,6 +145,13 @@ const run = async () => {
       await exec.exec("gpg", ["--import", "/public.key"]);
       await exec.exec("gpg", ["--allow-secret-key-import", "--import", "/private.key"]);
     }
+    
+    if (process.env.AGE_SECRETS_KEY_FILE) {
+      await fsp.writeFile(
+        "~/.config/sops/age/key.txt",
+        process.env.AGE_SECRETS_KEY_FILE
+      );
+    }
 
     if (task === "remove") {
       // Delete the deployment
