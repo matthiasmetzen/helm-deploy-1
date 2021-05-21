@@ -1,6 +1,6 @@
 import core from "@actions/core";
 import exec from "@actions/exec";
-import * as path from "path";
+import path from "path";
 import { promises as fsp } from "fs";
 
 const getValues = (values) => {
