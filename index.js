@@ -147,6 +147,7 @@ const run = async () => {
     }
     
     if (process.env.AGE_SECRETS_KEY_FILE) {
+      await fsp.mkdir('~/.config/sops/age/', { recursive: true });
       await fsp.writeFile(
         "~/.config/sops/age/key.txt",
         process.env.AGE_SECRETS_KEY_FILE
