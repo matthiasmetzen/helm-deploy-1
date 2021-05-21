@@ -135,12 +135,12 @@ const run = async () => {
     // Setup the GPG keys, if specified
     if (process.env.GPG_PUBLIC_KEY && process.env.GPG_PRIVATE_KEY) {
       await fsp.writeFile(
-        process.env.GPG_PUBLIC_KEY,
-        '/public.key'
+        '/public.key',
+        process.env.GPG_PUBLIC_KEY
       );
       await fsp.writeFile(
-        process.env.GPG_PUBLIC_KEY,
-        '/private.key'
+        '/private.key',
+        process.env.GPG_PUBLIC_KEY
       );
       await exec.exec("gpg", ["--import", "/public.key"]);
       await exec.exec("gpg", ["--allow-secret-key-import", "--import", "/private.key"]);
