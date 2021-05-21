@@ -1,5 +1,6 @@
 import core from "@actions/core";
 import exec from "@actions/exec";
+import * as path from "path";
 import { promises as fsp } from "fs";
 
 const getValues = (values) => {
@@ -147,9 +148,11 @@ const run = async () => {
     }
     
     if (process.env.AGE_SECRETS_KEY_FILE) {
-      await fsp.mkdir('~/.config/sops/age/', { recursive: true });
+      process.env.SOPS_AGE_KEY_FILE = process.env.SOPS_AGE_KEY_FILE || '~/.config/sops/age/keys.txt';
+      let path = path.dirname(process.env.SOPS_AGE_KEY_FILE)
+      await fsp.mkdir(path, { recursive: true });
       await fsp.writeFile(
-        "~/.config/sops/age/keys.txt",
+        process.env.SOPS_AGE_KEY_FILE,
         process.env.AGE_SECRETS_KEY_FILE
       );
     }
