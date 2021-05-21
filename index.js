@@ -149,8 +149,8 @@ const run = async () => {
     
     if (process.env.AGE_SECRETS_KEY_FILE) {
       process.env.SOPS_AGE_KEY_FILE = process.env.SOPS_AGE_KEY_FILE || '~/.config/sops/age/keys.txt';
-      let path = path.dirname(process.env.SOPS_AGE_KEY_FILE)
-      await fsp.mkdir(path, { recursive: true });
+      let sops_age_path = path.dirname(process.env.SOPS_AGE_KEY_FILE)
+      await fsp.mkdir(sops_age_path, { recursive: true });
       await fsp.writeFile(
         process.env.SOPS_AGE_KEY_FILE,
         process.env.AGE_SECRETS_KEY_FILE
