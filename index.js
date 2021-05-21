@@ -115,8 +115,10 @@ const run = async () => {
     additionalArgs.forEach((f) => args.push(`${f}`));
 
     // Add the individually added values
-    await fsp.writeFile("/values.yml", values);
-    args.push("--values=/values.yml");
+    if(values) {
+      await fsp.writeFile("/values.yml", values);
+      args.push("--values=/values.yml");
+    }
 
     // Setup the Kubeconfig file
     if (process.env.KUBECONFIG_FILE) {
