@@ -7,12 +7,9 @@ ENV HELM_FILE="helm-v3.5.3-linux-amd64.tar.gz"
 ARG SOPS_VERSION="v3.7.1"
 
 RUN apk add --no-cache ca-certificates \
-  --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-    age && \
-    \
     apk add --no-cache ca-certificates \
     --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
-    jq curl wget bash nodejs yarn git gnupg && \
+    jq curl wget bash nodejs yarn git gnupg age && \
     \
     wget https://github.com/mozilla/sops/releases/download/$SOPS_VERSION/sops-$SOPS_VERSION.linux -O /usr/local/bin/sops && \
     chmod 0755 /usr/local/bin/sops && \
