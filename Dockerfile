@@ -7,7 +7,6 @@ ENV HELM_FILE="helm-v3.5.3-linux-amd64.tar.gz"
 ARG SOPS_VERSION="v3.7.1"
 
 RUN apk add --no-cache ca-certificates \
-    apk add --no-cache ca-certificates \
     --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
     jq curl wget bash nodejs yarn git gnupg age && \
     \
