@@ -2,7 +2,7 @@ FROM alpine:3.13
 
 ENV BASE_URL="https://get.helm.sh"
 
-ENV HELM_FILE="helm-v3.5.3-linux-amd64.tar.gz"
+ENV HELM_FILE="helm-v3.9.0-linux-amd64.tar.gz"
 
 ARG SOPS_VERSION="v3.7.1"
 
